@@ -1,7 +1,7 @@
 ---
-title: "Responsiveness in immigration enforcement"
-author: "Angelo Dagonel (TF)"
-description: "County-level ICE compliance under constituent preferences and electoral dynamics"
+title: "Food Security and Access to Nutrition Assistance Programs in Rural Communities of Color"
+author: "Artha Kristie Jonassaint"
+description: "SNAP, WIC, and School Meals Access, Food Security, and Rural Communities of Color" 
 output:
   distill::distill_article:
     self_contained: false
@@ -9,19 +9,9 @@ output:
 
 
 
-## Project thoughts
+## Milestone One - Interest and Thoughts
 
-I am interested in exploring data related to immigration enforcement and immigration preferences. A working project with Asya Magazinnik (Massachusetts Institute of Technology) explores how county-level compliance of Sheriff's offices with ICE detainer requests relates to ideal point estimates of immigration preferences. Specifically: our project asks whether the public's immigration preferences, restrictive or accommodating, influences how local law enforcement agencies comply with bureaucratic delegation from ICE.
-
-To investigate this relationship, we are relying on data from three different sources:
-
-1. [Transactional Records Access Clearinghouse (TRAC)](https://trac.syr.edu/immigration/) data on detainer requests sent to county Sheriff's offices from the Department of Homeland Security's sub-agency Immigration Customs and Enforcement (ICE);
-
-2. [Coooperative Election Study (CES)](https://cces.gov.harvard.edu/) data on immigration policy preferences; and
-
-3. novel data of county-level Sheriff elections and electoral type--partisan or non-partisan elections, non-electoral appointment.
-
-TRAC data provides us with our outcome variable, the proportion of ICE detainer requests that are complied with; CES data provides us with our explanatory variable, public immigration policy preferences; and the Sheriff electoral data provides us with a grouping variable.
+I am interested in exploring the relationship between food security and the rates of access to federal nutrition assistance programs such as the Supplemental Nutrition Assistance Program (SNAP), Special Supplemental Nutrition Program for Women, Infant, and Children (WIC), and School Breakfast and Lunch programs in rural communities. In the contemporary sociopolitical dialogue, "rural" is often used as a dog-whistle for white, though many rural communities of color exist in the South and in California. I would like to explore the rates of food insecurity in these communities and if they are receiving the aid they need from the government to increase access to safe, healthy foods. 
 
 
 
