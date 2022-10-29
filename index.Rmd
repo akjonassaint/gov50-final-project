@@ -1,7 +1,7 @@
 ---
-title: "Food Security and Access to Nutrition Assistance Programs in Rural Communities of Color"
+title: "Food Security and Access to Nutrition Assistance Programs in Rural Communities " 
 author: "Artha Kristie Jonassaint"
-description: "SNAP, WIC, and School Meals Access, Food Security, and Rural Communities of Color" 
+description: "SNAP Enrollment, Poverty, and Rural Communities" 
 output:
   distill::distill_article:
     self_contained: false
@@ -11,7 +11,9 @@ output:
 
 ## Milestone One - Interest and Thoughts
 
-I am interested in exploring the relationship between food security and the rates of access to federal nutrition assistance programs such as the Supplemental Nutrition Assistance Program (SNAP), Special Supplemental Nutrition Program for Women, Infant, and Children (WIC), and School Breakfast and Lunch programs in rural communities. In the contemporary sociopolitical dialogue, "rural" is often used as a dog-whistle for white, though many rural communities of color exist in the South and in California. I would like to explore the rates of food insecurity in these communities and if they are receiving the aid they need from the government to increase access to safe, healthy foods. 
+I am interested in exploring the relationship between food security and the rates of access to federal nutrition assistance programs such as the Supplemental Nutrition Assistance Program (SNAP) in rural communities. In the contemporary sociopolitical dialogue, "rural" is often used as a dog-whistle for white, though many rural communities of color exist in the South and in California. I would like to explore the rates of food insecurity in these communities and if they are receiving the aid they need from the government to increase access to safe, healthy foods. 
 
+## Milestone Two - Potential Datasets
 
+The Food Research and Action Center [link] (https://frac.org/maps/snap-county-map/tables/snap-county-tab-2019.html) has data that encompasses variables of state, county, metro/small town/rural distinctions, percentage with SNAP, and percent margin error. With this data set, I'd like to investigate the relationship between rural areas and the percentage with SNAP. I would ideally have to combine this dataset with a dataset that includes county-level poverty rates and racial demographic information to investigate my ideal question: do rural counties with high poverty rates and high minority populations also have high rates of SNAP enrollment? Because of the laborious nature of SNAP enrollment, I hypothesize that the rural counties with higher levels of minority residents have lower rates of SNAP enrollment. Because enrollment relies on internet access or access to offices with long lines that are only open during business hours - these rural communities of color may not have the same access to these kinds of program. My explanatory variables of interest are county type (rural, small town, and metro), percentage of minority residents (how many residents are nonwhite and/or Latino/Hispanic), and poverty rate (how many residents are living under the federal rate). My outcome variable is SNAP enrollment. Patterns that would support my hypothesis would be high minority populations, high rates of poverty, but low SNAP enrollment. Trends that would disprove my hypothesis would show no or little relationship between poverty rates, racial/ethnic demographic breakdown, and SNAP enrollment when I run my regression. 
 
