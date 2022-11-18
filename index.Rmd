@@ -52,13 +52,15 @@ poverty_snapflorida <- poverty_snapflorida %>%
 
 ```{r}
 
-poverty_snapflorida %>%
+snapplot <- poverty_snapflorida %>%
   ggplot(aes(x = pop_blacklatino, y = pct_with_snap, color = county)) +
   geom_point(color = "blue") +
   geom_smooth(method = lm) +
   labs(title = "Population Receiving SNAP Benefits in Rural/Small Town Florida Counties",
        y = "Percentage of Population with SNAP",
        x = "Percentage of Total Population - Black and Latino")
+
+snapplot
   
 ```
 ## Milestone 4 - Results from One Analysis
