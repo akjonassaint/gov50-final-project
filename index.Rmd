@@ -1,5 +1,5 @@
 ---
-title: "Food Security and Access to Nutrition Assistance Programs in Rural Communities in Florida " 
+title: "Access to Nutrition Assistance Programs in Rural and Small Town Communities in Florida " 
 author: "Artha Kristie Jonassaint"
 description: "SNAP Enrollment, Poverty, and Rural Communities" 
 output:
@@ -7,33 +7,72 @@ output:
     self_contained: false
 ---
 
-
-
 ## Milestone One - Interest and Thoughts
 
-I am interested in exploring the relationship between food security and the rates of access to federal nutrition assistance programs such as the Supplemental Nutrition Assistance Program (SNAP) in rural communities. In the contemporary sociopolitical dialogue, "rural" is often used as a dog-whistle for white, though many rural communities of color exist in the South and in California. I would like to explore the rates of food insecurity in Florida counties and if they are receiving the aid they need from the government to increase access to safe, healthy foods. 
+I am interested in exploring the relationship between the rates of access to federal nutrition assistance programs such as the Supplemental Nutrition Assistance Program (SNAP) in rural and small town communities in Florida. In the contemporary sociopolitical dialogue, "rural" is often used as a dog-whistle for white, though many rural communities of color exist in the South and in California. I would like to explore the rates of food insecurity in Florida counties and if they are receiving the aid they need from the government to increase access to safe, healthy foods. 
 
 ## Milestone Two - Potential Datasets
 
-[The Food Research and Action Center](https://frac.org/maps/snap-county-map/tables/snap-county-tab-2019.html) has data that encompasses variables of state, county, metro/small town/rural distinctions, percentage with SNAP, and percent margin error. With this data set, I'd like to investigate the relationship between rural areas and the percentage with SNAP. I would ideally have to combine this dataset with a dataset that includes county-level poverty rates and racial demographic information to investigate my ideal question: do rural counties with high poverty rates and high minority populations also have high rates of SNAP enrollment? Because of the laborious nature of SNAP enrollment, I hypothesize that the rural counties with higher levels of minority residents have lower rates of SNAP enrollment. Because enrollment relies on internet access or access to offices with long lines that are only open during business hours - these rural communities of color may not have the same access to these kinds of program. My explanatory variables of interest are county type (rural, small town, and metro), percentage of minority residents (how many residents are nonwhite and/or Latino/Hispanic), and poverty rate (how many residents are living under the federal rate). My outcome variable is SNAP enrollment. Patterns that would support my hypothesis would be high minority populations, high rates of poverty, but low SNAP enrollment. Trends that would disprove my hypothesis would show no or little relationship between poverty rates, racial/ethnic demographic breakdown, and SNAP enrollment when I run my regression. 
+[The Food Research and Action Center](https://frac.org/maps/snap-county-map/tables/snap-county-tab-2019.html) has data that encompasses variables of state, county, metro/small town/rural distinctions, percentage with SNAP, and percent margin error. With this data set, I'd like to investigate the relationship between rural areas and the percentage with SNAP. I have combined this dataset with data collected by the [Census](https://www.census.gov/data/tables/time-series/demo/popest/2010s-counties-detail.html) that includes county-level poverty rates and racial demographic information to investigate my ideal question: do rural counties with high poverty rates and high minority populations also have high rates of SNAP enrollment? Because of the laborious nature of SNAP enrollment, I hypothesize that the rural counties with higher levels of minority residents have lower rates of SNAP enrollment. Because enrollment relies on internet access or access to offices with long lines that are only open during business hours - these rural and small town communities of color may not have the same access to these kinds of program. My explanatory variables of interest are percentage of minority residents (how many residents are nonwhite and/or Latino/Hispanic) and poverty rate (how many residents are living under the federal rate). My outcome variable is SNAP enrollment. I have also filtered this data so that it only evaluates rural and small town communities in Florida. Patterns that would support my hypothesis would be high minority populations, high rates of poverty, but low SNAP enrollment. Trends that would disprove my hypothesis would show no or little relationship between poverty rates, racial/ethnic demographic breakdown, and SNAP enrollment when I run my regression. 
 
 ## Milestone Three - Visualization
+
+The following chunk is me cleaning up my data, joining datasets, and renaming variables for ease of use.
 
 ```{r}
 library(tidyverse)
 library(ggplot2)
 snapdata <- read_csv("snap_hh_2019_5yr-2.csv")
 
-ruralcounties <- snapdata %>%
-  filter(`Metro/Small Town/Rural Status`== "Rural area" & State == "Florida") 
+rural.smallcounties <- snapdata %>%
+  filter(`Metro/Small Town/Rural Status` %in% c("Rural area", "Small town") & State == "Florida") %>%
+  rename(BlackPop = `Population Percentage - Black`,
+         LatinoPop = `Population Percentage - Hispanic/Latino`) 
 
-ruralcounties %>%
-  ggplot(aes(x = County, y = `Percent with SNAP`)) +
-  geom_point(color = "pink") +
-  labs(title = "Percentage of Population Receiving SNAP Benefits in Rural Florida Counties",
-       source = "FRAC, 2019")
-  
+poverty <- read_csv("PovertyReport.csv")
 
 
+poverty_snapflorida <- inner_join(poverty, rural.smallcounties, by = c("county" = "County"))
+
+poverty_snapflorida <- poverty_snapflorida %>%
+  select(county, total_est_pct3, under18_pct3, `Metro/Small Town/Rural Status`, `Percent with SNAP`, BlackPop, LatinoPop)
+
+str(poverty_snapflorida)
+poverty_snapflorida <- poverty_snapflorida |>
+  mutate(pct_with_snap = as.numeric(gsub("%","",`Percent with SNAP`)),
+         black_pop = as.numeric(gsub("%","",`BlackPop`)),
+         latino_pop = as.numeric(gsub("%","",`LatinoPop`)))
+
+poverty_snapflorida <- poverty_snapflorida %>%
+  mutate(pop_blacklatino = black_pop + latino_pop)
+
+poverty_snapflorida <- poverty_snapflorida %>%
+   select(county, total_est_pct3, under18_pct3, `Metro/Small Town/Rural Status`, pct_with_snap, pop_blacklatino, black_pop, latino_pop) %>%
+  rename(smalltown_rural = `Metro/Small Town/Rural Status`)
 ```
 
+```{r}
+
+poverty_snapflorida %>%
+  ggplot(aes(x = pop_blacklatino, y = pct_with_snap, color = county)) +
+  geom_point(color = "blue") +
+  geom_smooth(method = lm) +
+  labs(title = "Population Receiving SNAP Benefits in Rural/Small Town Florida Counties",
+       y = "Percentage of Population with SNAP",
+       x = "Percentage of Total Population - Black and Latino")
+  
+```
+## Milestone 4 - Results from One Analysis
+```{r}
+library(broom)
+library(knitr)
+
+a1.lm <- lm(pct_with_snap ~ pop_blacklatino, poverty_snapflorida)
+
+a1.lm %>%
+  tidy() %>%
+  kable(caption = "Coefficient Estimates for a Model Fitted to Estimate SNAP Participation by Population of Black and Latino",
+        col.names = c("Predictor", "Estimate", "Std. Error", "Statistic", "P. Value"),
+        digits = c(0, 2, 3, 2, 3))
+```
+When the population of Black and Latino people in a county increases by one unit (one percentage), the percentage of the population that receives SNAP increases by 0.04. This however, is not a statistically significant relationship because of the high p-value. In my next analyses, I will evaluate this relationship with poverty and then population of Black people, and population of Latino people separately to see if there is a statistically significant relationship. 
