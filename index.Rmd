@@ -52,7 +52,7 @@ poverty_snapflorida <- poverty_snapflorida %>%
 
 ```{r}
 
-snapplot <- poverty_snapflorida %>%
+poverty_snapflorida %>%
   ggplot(aes(x = pop_blacklatino, y = pct_with_snap, color = county)) +
   geom_point(color = "blue") +
   geom_smooth(method = lm) +
@@ -60,8 +60,6 @@ snapplot <- poverty_snapflorida %>%
        y = "Percentage of Population with SNAP",
        x = "Percentage of Total Population - Black and Latino")
 
-snapplot
-  
 ```
 ## Milestone 4 - Results from One Analysis
 
