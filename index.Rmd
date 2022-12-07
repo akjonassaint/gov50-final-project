@@ -13,7 +13,7 @@ The Supplemental Nutrition Assistance Program (or SNAP) is the United States' la
 
 In contemporary political dialogue, rural often is used as a dog-whistle for "white." This is misleading, as several pockets of rural America are very diverse. As discussions about the 2023 Farm Bill are well underway on Capitol Hill and nutrition assistance programs historically constituting the largest share of Farm Bill dollars, the efficacy of SNAP reaching impoverished communities in totality as well as communities of color specifically is at the center of my curiosity. Taken together, I am interested in investigating if SNAP is being accessed by those who are living below the federal poverty line in rural and small town counties, and if SNAP access differs in counties with higher populations of Black and Latino communities. 
 
-I have chosen to narrow in on my home state of Florida as its geographic position in the Southeastern United States and heterogeneous demographic makeup of the state makes for an interesting case study. As someone who grew up in small town Florida and consistently learns about urban sprawl and the suburbanization of the US, I wanted to use this opportunity to learn about more about the people and trends in the place I call home.
+I have chosen to narrow in on my home state of Florida as its geographic position in the Southeastern United States and heterogeneous demographic makeup of the state makes for an interesting case study. Tangentially, as someone who grew up in small town Florida and consistently learns about urban sprawl and the suburbanization of the US, I wanted to use this opportunity to learn about more about the people and trends in the place I call home.
 
 ## Data
 
@@ -28,16 +28,17 @@ I have chosen to narrow in on my home state of Florida as its geographic positio
    I have also filtered this data so that it only evaluates rural and small town counties in Florida.
   
 The variables in my data set are as follows:
-  + county - County name (in Florida) 
-  + total_poverty - Percentage of total population living below the federal poverty level 
-  + under18_poverty - Percentage of the under 18 population living below the federal poverty level
-  + smalltown_rural - If the county is considered a small town or rural based on population size
-  + pct_with_snap - Percentage of the total population receiving SNAP benefits
-  + pop_blacklatino - Percentage of the total population that is Black and/or Latino 
-  + black_pop - Percentage of the total population that is Black
-  + latino_pop - Percentage of the total population that is Latino/Hispanic
+
+* county - County name (in Florida) 
+* total_poverty - Percentage of total population living below the federal poverty level 
+* under18_poverty - Percentage of the under 18 population living below the federal poverty level
+* smalltown_rural - If the county is considered a small town or rural based on population size
+* pct_with_snap - Percentage of the total population receiving SNAP benefits
+* pop_blacklatino - Percentage of the total population that is Black and/or Latino 
+* black_pop - Percentage of the total population that is Black
+* latino_pop - Percentage of the total population that is Latino/Hispanic
   
-  The research design is cross-sectional as I am evaluating SNAP enrollment, poverty, and racial demographics of counties at one point in time. Of the 67 counties in Florida, 23 are considered small town or rural. Those counties are Bradford County, Calhoun County, Columbia County, DeSoto County, Dixie County, Franklin County, Glades County, Hamilton County, Hardee County, Hendry County, Holmes County, Jackson County, Lafayette County, Levy County, Liberty County, Madison County, Monroe County, Okeechobee County, Putnam County, Suwannee County, Taylor County, Union County, and Washington County.
+The research design is cross-sectional as I am evaluating SNAP enrollment, poverty, and racial demographics of counties at one point in time. Of the 67 counties in Florida, 23 are considered small town or rural. Those counties are Bradford County, Calhoun County, Columbia County, DeSoto County, Dixie County, Franklin County, Glades County, Hamilton County, Hardee County, Hendry County, Holmes County, Jackson County, Lafayette County, Levy County, Liberty County, Madison County, Monroe County, Okeechobee County, Putnam County, Suwannee County, Taylor County, Union County, and Washington County.
   
 
 ### The following chunk is consists of cleaning up data, joining datasets, and renaming variables for ease of use.
@@ -180,8 +181,8 @@ modelsummary::modelsummary(a1.lm,
 
 ```
 
-Much like the singular regressions, the multiple regression shows a strong relationship between percentage of population in poverty and SNAP enrollment, and an insignificant relationship between the percentage of Black and Latino people in a population and SNAP enrollment. (talk about coefficients)
+Much like the singular regressions, the multiple regression shows a strong relationship between percentage of population in poverty and SNAP enrollment, and an insignificant relationship between the percentage of Black and Latino people in a population and SNAP enrollment. The intercept coefficient of -3.162 indicates that if there were no Black and Latino people in a population and no poverty, we could expect SNAP enrollment to be -3.162%. According to this regression, holding poverty constant, we can expect a -0.017% decrease in SNAP enrollment with each percentage increase of Black and Latino population. The p.value of 0.719 is indicative of a statistically insignificant relationship and weak evidence of a relationship between these variables. Contrarily, holding race/ethnicity (Black/Latino) constant, we can expect a 1.207% increase of SNAP enrollment with each percentage increase of poverty in the population. The p.value of <0.001 indicates a very statistically significant relationship. 
 
 ## Conclusions
 
-Based on the data above, there is a strong relationship between poverty and SNAP enrollment in small town and rural counties in Florida, and no relationship between proportion of Black and Latino people and SNAP enrollment and poverty. Although these findings reject my secondary hypothesis of high rates of Black and Latino populations leading to lower rates of SNAP enrollment, this is good news for the State of Florida and the efficacy of SNAP in reaching vulnerable populations in rural and small-town counties. The populations that are most susceptible to food insecurity are receiving SNAP benefits, regardless of race in small town and rural Florida counties. This study is not enough to give legislators the green light though; while this is internally valid for the small-town and rural Florida counties evaluated above, it is important to note that there should be caution in generalizing these outcomes to every state. States across the United States vary demographically and socioculturally, and poverty is not the sole marker of food insecurity. People can make a wage above the federal poverty level and still struggle to consistently have access to safe, nutritious foods. 
+Based on the data above, there is a strong relationship between poverty and SNAP enrollment in small town and rural counties in Florida, and no relationship between proportion of Black and Latino people and SNAP enrollment and poverty. Although these findings reject my secondary hypothesis of high rates of Black and Latino populations leading to lower rates of SNAP enrollment, this is good news for the State of Florida and the efficacy of SNAP in reaching vulnerable populations in rural and small-town counties. The populations that are most susceptible to food insecurity are receiving SNAP benefits, regardless of race in small town and rural Florida counties. This study is not enough to give legislators a pat on the back regarding the efficacy and equity amongst SNAP recipients; while this is internally valid for the small-town and rural Florida counties evaluated above, it is important to note that there should be caution in generalizing these outcomes to every state. States across the United States vary demographically and socioculturally, only two marginalized communities are evaluated in this study (Black and Hispanic) although there are a plethora of races and ethnicities that could be observed, the sample here consisted of 23 counties, and poverty is not the sole marker of food insecurity. People can make a wage above the federal poverty level and still struggle to consistently have access to safe, nutritious foods. 
